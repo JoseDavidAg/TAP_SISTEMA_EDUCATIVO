@@ -5,12 +5,12 @@ Sistema para una secundaria para el control de alumnos, materias, profesores y c
 Este sistema fue creado con la intención de automatizar el envió de calificaciones a los padres de familia (tutores) de los alumnos con los que cuenta el profesor, pies el alumno cuenta con un tutor y este mismo cuenta con un correo electrónico, datos que se ingresan al momento de captrurar los datos cuando se registra un nuevo alumno; acción que solo puede hacer el administrador, pues el sistema cuenta con dos niveles de usuario, el Profesor y el Administrador. 
 
 
-##Características
+## Características
 
-#MVC
+# MVC
 Este sistema está hecho de acuerdo al Modelo Vista Controlador 
 
-#Paquetes
+# Paquetes
 Cuenta con los siguientes paquetes 
 
   •	Validaciones: Contiene la clase validacion.java. Para algunas validaciones dentro del sistema, como por ejemplo la contraseña, donde tiene que tener en ella ciertas características 
