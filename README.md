@@ -14,6 +14,7 @@ La separación clara entre estos componentes permite una mejor organización del
 
 ### Paquetes
 Cuenta con los siguientes paquetes 
+
 • Validaciones: Contiene la clase validacion.java. Para algunas validaciones dentro del sistema, como por ejemplo la contraseña, donde tiene que tener en ella ciertas características 
   para que pueda ser acepta en el sistema, al momento de crear una cuenta (un nuevo usuario). 
     
