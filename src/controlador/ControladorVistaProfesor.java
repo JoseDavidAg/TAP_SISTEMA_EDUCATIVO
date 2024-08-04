@@ -128,7 +128,7 @@ public class ControladorVistaProfesor {
         ps.setString(4, profesor.getDireccion());
         ps.setString(5, profesor.getTelefono());
         ps.setString(6, profesor.getEspecialidad());
-        ps.setString(7, profesor.getCedula());
+        ps.setInt(7, profesor.getCedula());
          ps.setInt(8, profesor.getIdProfesor());
 
         insertado = ps.executeUpdate() > 0;
@@ -154,7 +154,7 @@ public class ControladorVistaProfesor {
         ps.setString(4, profesor.getDireccion());
         ps.setString(5, profesor.getTelefono());
         ps.setString(6, profesor.getEspecialidad());
-        ps.setString(7, profesor.getCedula());
+        ps.setInt(7, profesor.getCedula());
         ps.setInt(8, profesor.getIdProfesor());
 
         actualizado = ps.executeUpdate() > 0;
@@ -181,7 +181,7 @@ public class ControladorVistaProfesor {
             profesor.setDireccion(rs.getString("direccion"));
             profesor.setTelefono(rs.getString("telefono"));
             profesor.setEspecialidad(rs.getString("especialidad"));
-            profesor.setCedula(rs.getString("cedula"));
+            profesor.setCedula(rs.getInt("cedula"));
             profesor.setIdUsuario(rs.getInt("usuarioId"));
 
             listaProfesores.add(profesor);

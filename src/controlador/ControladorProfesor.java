@@ -19,202 +19,174 @@ import modelo.Profesor;
  * @author Itzel_CG
  */
 public class ControladorProfesor {
-    
-    
-    
-     public static boolean insertarProfesor(Profesor profesor) {
-        boolean insertado = false;
-        Connection cn = Conexion.conectar();
-        String sql = "INSERT INTO tb_profesor (nombre, apellidoP, apellidoM, direccion, telefono, especialidad, cedula) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
-        try (PreparedStatement ps = cn.prepareStatement(sql)) {
-            ps.setString(1, profesor.getNombre());
-            ps.setString(2, profesor.getApellidoP());
-            ps.setString(3, profesor.getApellidoM());            
-            ps.setString(4, profesor.getDireccion());   
-            ps.setString(5, profesor.getTelefono());
-            ps.setString(6, profesor.getEspecialidad());
-            ps.setString(7, profesor.getCedula());
-          
-          
-            insertado = ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al insertar profesor: " + e.toString());
-        }
-        
-        return insertado;
-    }
-    
-    
-    
-    
-    
-     public static boolean existeProfesor(String cedula) {
-        boolean existe = false;
-        Connection cn = Conexion.conectar();
-        String sql = "SELECT cedula FROM tb_profesor WHERE cedula = ?";
-        
-        try (PreparedStatement ps = cn.prepareStatement(sql)) {
-            ps.setString(1, cedula);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                existe = true;
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al verificar existencia del profesor: " + e.toString());
-        }
-        
-        return existe;
-    }
-    
-    
-     
-     
-     public static boolean eliminarProfesor(String cedula) {
-        boolean eliminado = false;
-        Connection cn = Conexion.conectar();
-        String sql = "DELETE FROM tb_profesor WHERE cedula = ?";
-        
-        try (PreparedStatement ps = cn.prepareStatement(sql)) {
-            ps.setString(1, cedula);
-            eliminado = ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar profesor: " + e.toString());
-        }
-        
-        return eliminado;
-    } 
-    
-     
-     
-     
-     public static List<Profesor> obtenerProfesor() {
-        List<Profesor> listaProfesor = new ArrayList<>();
-        Connection cn = Conexion.conectar();
-        String sql = "SELECT nombre, apellidoP, apellidoM, direccion, telefono, especialidad, cedula FROM tb_profesor";
 
-        try (PreparedStatement ps = cn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                Profesor profesor = new Profesor();
-                
-                profesor.setNombre(rs.getString("nombre"));
-                profesor.setApellidoP(rs.getString("apellidoP"));
-                profesor.setApellidoM(rs.getString("apellidoM"));
-                profesor.setDireccion(rs.getString("direccion"));
-                profesor.setTelefono(rs.getString("telefono"));
-                profesor.setEspecialidad(rs.getString("especialidad"));
-                profesor.setCedula(rs.getString("cedula"));
-            
-          
-                
-                
-                listaProfesor.add(profesor);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener los profesores: " + e.toString());
+    public static void insertarProfesor(Profesor profesor) throws SQLException {
+        if (existeProfesorPorCedula(profesor.getCedula())) {
+            throw new SQLException("El profesor con esta cédula ya existe.");
         }
+        Connection conn = null;
+        PreparedStatement pstmt = null;
 
-        return listaProfesor;
-    }
-     
-     
-     
-     public static boolean modificarProfesor(Profesor profesor) {
-         
-        boolean modificado = false;
-        Connection cn = Conexion.conectar();
-      
-        String sql = "UPDATE tb_profesor SET nombre = ?, apellidoP = ?, apellidoM = ?, direccion = ?, telefono = ?, especialidad = ? WHERE cedula = ?";
-        try (PreparedStatement pstmt = cn.prepareStatement(sql)) {
+        try {
+            conn = Conexion.conectar();
+            String sql = "INSERT INTO tb_profesor (nombre, apellidoP, apellidoM, direccion, telefono, especialidad, cedula, IdUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(sql);
+
             pstmt.setString(1, profesor.getNombre());
             pstmt.setString(2, profesor.getApellidoP());
             pstmt.setString(3, profesor.getApellidoM());
             pstmt.setString(4, profesor.getDireccion());
             pstmt.setString(5, profesor.getTelefono());
             pstmt.setString(6, profesor.getEspecialidad());
-            pstmt.setString(7, profesor.getCedula());
-          
+            pstmt.setInt(7, profesor.getCedula());
+            pstmt.setInt(8, profesor.getIdUsuario());
 
-            int filasActualizadas = pstmt.executeUpdate();
-        return filasActualizadas > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
-       
-            return modificado;
+            pstmt.executeUpdate();
+        } finally {
+            if (pstmt != null) pstmt.close();
+            if (conn != null) conn.close();
         }
     }
-     
-     
-     
-     
-     
-     public static boolean actualizarProfesor(Profesor profesor, String cedula) {
-         
-        boolean modificado = false;
-        Connection cn = Conexion.conectar();
-      
-        String sql = "UPDATE tb_profesor SET nombre = ?, apellidoP = ?, apellidoM = ?, direccion = ?, telefono = ?, especialidad = ? WHERE cedula = ?";
-        try (PreparedStatement consulta = cn.prepareStatement(sql)) {
-            consulta.setString(1, profesor.getNombre());
-            consulta.setString(2, profesor.getApellidoP());
-            consulta.setString(3, profesor.getApellidoM());
-            consulta.setString(4, profesor.getDireccion());
-            consulta.setString(5, profesor.getTelefono());
-            consulta.setString(6, profesor.getEspecialidad());
-            consulta.setString(7, profesor.getCedula());
-          
-            if (consulta.executeUpdate()> 0){
-            modificado= true;
-            }
-            
-            cn.close();
-    } catch (SQLException e) {
-        
-        System.out.println ("Error al actualizar Profesor: " + e);
-       
-        }
-         return modificado;
-    }
-     
-     
-    
-     
-     
-      public static Profesor obtenerProfesorPorCedula(String cedula) {
-        Profesor profesor = null;
 
-        String sql = "SELECT IdProfesor, nombre, apellidoP, apellidoM, direccion, telefono, especialidad, cedula, IdUsuario FROM tb_profesor WHERE cedula = ?";
-        
-        try (Connection conn = Conexion.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-             
-            ps.setString(1, cedula);
-            ResultSet rs = ps.executeQuery();
-            
+    public static boolean existeProfesorPorCedula(int cedula) throws SQLException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Conexion.conectar();
+            String sql = "SELECT COUNT(*) FROM tb_profesor WHERE cedula = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, cedula);
+            rs = pstmt.executeQuery();
+
             if (rs.next()) {
-                profesor = new Profesor(
-                    rs.getInt("IdProfesor"),
-                    rs.getString("nombre"),
-                    rs.getString("apellidoP"),
-                    rs.getString("apellidoM"),
-                    rs.getString("direccion"),
-                    rs.getString("telefono"),
-                    rs.getString("especialidad"),
-                    rs.getString("cedula"),
-                    rs.getInt("IdUsuario")
-                );
+                return rs.getInt(1) > 0;
+            }
+
+            return false;
+        } finally {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+            if (conn != null) conn.close();
+        }
+    }
+
+    public static boolean eliminarProfesor(int cedula) {
+        boolean eliminado = false;
+        Connection cn = Conexion.conectar();
+        String sql = "DELETE FROM tb_profesor WHERE cedula = ?";
+
+        try (PreparedStatement ps = cn.prepareStatement(sql)) {
+            ps.setInt(1, cedula);
+            eliminado = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar profesor: " + e.getMessage());
+        }
+
+        return eliminado;
+    }
+
+    public static List<Profesor> obtenerProfesor() {
+        List<Profesor> listaProfesor = new ArrayList<>();
+        Connection cn = Conexion.conectar();
+        String sql = "SELECT nombre, apellidoP, apellidoM, direccion, telefono, especialidad, cedula, IdUsuario FROM tb_profesor";
+
+        try (PreparedStatement ps = cn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Profesor profesor = new Profesor();
+                profesor.setNombre(rs.getString("nombre"));
+                profesor.setApellidoP(rs.getString("apellidoP"));
+                profesor.setApellidoM(rs.getString("apellidoM"));
+                profesor.setDireccion(rs.getString("direccion"));
+                profesor.setTelefono(rs.getString("telefono"));
+                profesor.setEspecialidad(rs.getString("especialidad"));
+                profesor.setCedula(rs.getInt("cedula"));
+                profesor.setIdUsuario(rs.getInt("IdUsuario"));
+
+                listaProfesor.add(profesor);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los profesores: " + e.getMessage());
+        }
+
+        return listaProfesor;
+    }
+
+    public static boolean actualizarProfesor(Profesor profesor) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        boolean actualizado = false;
+
+        try {
+            conn = Conexion.conectar();
+            String sql = "UPDATE tb_profesor SET nombre = ?, apellidoP = ?, apellidoM = ?, direccion = ?, telefono = ?, especialidad = ?, IdUsuario = ? WHERE cedula = ?";
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, profesor.getNombre());
+            pstmt.setString(2, profesor.getApellidoP());
+            pstmt.setString(3, profesor.getApellidoM());
+            pstmt.setString(4, profesor.getDireccion());
+            pstmt.setString(5, profesor.getTelefono());
+            pstmt.setString(6, profesor.getEspecialidad());
+            pstmt.setInt(7, profesor.getIdUsuario());
+            pstmt.setInt(8, profesor.getCedula());
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                actualizado = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error al obtener el profesor: " + e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return actualizado;
+    }
+
+    public static Profesor getProfesorPorCedula(int cedula) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Profesor profesor = null;
+
+        try {
+            conn = Conexion.conectar();
+            String sql = "SELECT * FROM tb_profesor WHERE cedula = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, cedula);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                profesor = new Profesor();
+                profesor.setNombre(rs.getString("nombre"));
+                profesor.setApellidoP(rs.getString("apellidoP"));
+                profesor.setApellidoM(rs.getString("apellidoM"));
+                profesor.setDireccion(rs.getString("direccion"));
+                profesor.setTelefono(rs.getString("telefono"));
+                profesor.setEspecialidad(rs.getString("especialidad"));
+                profesor.setCedula(rs.getInt("cedula"));
+                profesor.setIdUsuario(rs.getInt("IdUsuario"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return profesor;
     }
-     
-     
-     
-     
-    
-    
 }

@@ -223,6 +223,51 @@ try (PreparedStatement preparedStatement = connection.prepareStatement(consulta.
     }
 }
     
+     public void actualizaMateria(String idMateria, int idProfesor, String idGrupo) throws SQLException {
+    // Verifica si la consulta está correctamente formateada
+   
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Problemas en la conexión: " + e.toString());
+        }
+        
+     String checkQuery = "SELECT COUNT(*) FROM profesor_materia_grupo WHERE IdMateria = ? AND IdProfesor = ? AND IdGrupo = ?";
+        try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
+            checkStmt.setString(1,  idMateria);
+            checkStmt.setInt(2,idProfesor);
+            checkStmt.setString(3, idGrupo);
+            ResultSet rs = checkStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                // La combinación ya existe
+                JOptionPane.showMessageDialog(null, "La combinación de IdAlumno, IdMateria e IdPeriodo ya existe.");
+            } else {
+                // La combinación no existe, proceder con la actualización
+                String updateQuery = "INSERT INTO profesor_materia_grupo (IdMateria,IdProfesor, IdGrupo)VALUES (?, ?, ?)";
+                try (PreparedStatement updateStmt = connection.prepareStatement(updateQuery)) {
+                    updateStmt.setString(1,  idMateria);
+                    updateStmt.setInt(2,idProfesor);
+                    updateStmt.setString(3, idGrupo);
+                    
+                    int rowsUpdated = updateStmt.executeUpdate();
+                    if (rowsUpdated > 0) {
+                        JOptionPane.showMessageDialog(null, "Calificación actualizada correctamente.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se encontró la fila para actualizar.");
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error al actualizar la calificación.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al verificar la existencia de la combinación.");
+        } 
+        
+}
+    
     
 public ArrayList<String> obtenerCalificaciones(String consulta, int boletaID, int periodoID) {
     // Lista para almacenar las calificaciones

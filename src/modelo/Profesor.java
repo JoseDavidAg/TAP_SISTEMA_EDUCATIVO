@@ -19,13 +19,13 @@ public class Profesor {
     private String direccion;
     private String telefono;
     private String especialidad;
-    private String cedula;
+    private int cedula;
     private int IdUsuario;
 
     
 
-    public Profesor(int IdProfesor, String nombre, String apellidoP, String apellidoM, String direccion, String telefono, String especialidad, String cedula, int IdUsuario) {
-        this.IdProfesor = IdProfesor;
+    public Profesor(String nombre, String apellidoP, String apellidoM, String direccion, String telefono, String especialidad, int cedula, int IdUsuario) {
+       // this.IdProfesor = IdProfesor;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -43,7 +43,7 @@ public class Profesor {
     
     
     public Profesor (){
-        this.IdProfesor =0;
+        //this.IdProfesor =0;
         this.nombre = "";
         this.apellidoP = "";
         this.apellidoM = "";
@@ -52,7 +52,7 @@ public class Profesor {
         this.telefono = "";
         
         this.especialidad = "";
-        this.cedula = "";
+        this.cedula = 0;
         this.IdUsuario= 0;
     
     
@@ -119,11 +119,11 @@ public class Profesor {
     }
     
     
-    public String getCedula() {
+    public int getCedula() {
         return cedula;
     }
 
-    public void setCedula(String cedula) {
+    public void setCedula(int cedula) {
         this.cedula = cedula;
     }
     

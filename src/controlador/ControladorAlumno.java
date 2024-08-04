@@ -175,6 +175,13 @@ public class ControladorAlumno {
         boolean eliminado = false;
         Connection cn = Conexion.conectar();
         String sql = "DELETE FROM tb_alumno WHERE IdAlumno = ?";
+        String sql2= "DELETE FROM calificacionperiodo WHERE idAlumno =?";  
+        try (PreparedStatement ps = cn.prepareStatement(sql2)) {
+            ps.setString(1, control);
+            eliminado = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar la boleta: " + e.toString());
+        }
         
         try (PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, control);

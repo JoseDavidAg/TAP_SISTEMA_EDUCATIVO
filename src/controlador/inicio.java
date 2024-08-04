@@ -81,6 +81,17 @@ public class inicio {
 
 }
     
+     public ArrayList<String> getModels(String consulta,String dato,String valor) throws SQLException {
+    ArrayList<String> grupos = new ArrayList<>();
+    try (ResultSet gruposResultado = connection.getValor(consulta, valor)) {
+        while (gruposResultado.next()) {
+            grupos.add(gruposResultado.getString(dato));
+        }
+    }
+    return grupos;
+     }
+
+    
     
     //Obtenemos un Array<String> de todos los usuariosID del grupoID
     public ArrayList<String> getModels2(String grupoID) throws SQLException {
@@ -212,7 +223,10 @@ public class inicio {
     connection.actualizarCalificacion(boletaID, periodoID, calificacion, materiaID, consulta);
 }
     
-   
+   public void actualizaMateriaProfesor(String idMateria, int idProfesor, String idGrupo) throws SQLException {
+      
+        connection.actualizaMateria(idMateria, idProfesor, idGrupo);
+   }
    
 public void sendEmail(String fromEmail, String password, String toEmail, String subject, String htmlMessage, String filePath) throws MessagingException, IOException {
     // Configuración de las propiedades del correo
