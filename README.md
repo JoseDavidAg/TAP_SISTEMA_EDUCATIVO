@@ -7,10 +7,10 @@ Este sistema fue creado con la intención de automatizar el envió de calificaci
 
 ## Características
 
-# MVC
+### MVC
 Este sistema está hecho de acuerdo al Modelo Vista Controlador 
 
-# Paquetes
+### Paquetes
 Cuenta con los siguientes paquetes 
 
   •	Validaciones: Contiene la clase validacion.java. Para algunas validaciones dentro del sistema, como por ejemplo la contraseña, donde tiene que tener en ella ciertas características 
