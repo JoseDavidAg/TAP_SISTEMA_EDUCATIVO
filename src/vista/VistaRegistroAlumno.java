@@ -5,6 +5,7 @@
 package vista;
 
 import controlador.ControladorAlumno;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,14 +15,18 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.Alumno;
+import vista.VistaPrincipalP;
 
 
 /**
  *
  * @author Itzel_CG
  */
-public final class VistaRegistroAlumno extends javax.swing.JFrame {
+public class VistaRegistroAlumno extends javax.swing.JFrame {
 
+    
+    
+    
     
     public VistaRegistroAlumno() {
         initComponents();
@@ -31,7 +36,15 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
         this.setSize(new Dimension (900, 560));
         cargarDatos();
         
-         
+         etiNombre4.setVisible(false);
+         etiNombre5.setVisible(false);
+         etiNombre3.setVisible(false);
+         etiNombre4.setVisible(false);
+         etiNombre6.setVisible(false);
+         etiNombre7.setVisible(false);
+         etiNombre8.setVisible(false);
+         etiNombre9.setVisible(false);
+            
          
     }
 
@@ -47,6 +60,7 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
         btnGrupo = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        etiNombre2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -88,8 +102,13 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtGrupo = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        txtBoleta = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
+        etiNombre3 = new javax.swing.JLabel();
+        etiNombre4 = new javax.swing.JLabel();
+        etiNombre5 = new javax.swing.JLabel();
+        etiNombre6 = new javax.swing.JLabel();
+        etiNombre7 = new javax.swing.JLabel();
+        etiNombre8 = new javax.swing.JLabel();
+        etiNombre9 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -104,6 +123,9 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        etiNombre2.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre2.setText("Solo letras");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -420,23 +442,33 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
         jLabel19.setText("Gupo Asignado");
         jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 100, 26));
 
-        txtBoleta.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
-        txtBoleta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtBoleta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBoletaActionPerformed(evt);
-            }
-        });
-        txtBoleta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBoletaKeyTyped(evt);
-            }
-        });
-        jPanel4.add(txtBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 180, -1));
+        etiNombre3.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre3.setText("Solo números");
+        jPanel4.add(etiNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 80, 30));
 
-        jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel20.setText("Id Boleta");
-        jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 100, 30));
+        etiNombre4.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre4.setText("Solo letras");
+        jPanel4.add(etiNombre4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 60, 20));
+
+        etiNombre5.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre5.setText("Solo letras");
+        jPanel4.add(etiNombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 60, 30));
+
+        etiNombre6.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre6.setText("Solo letras");
+        jPanel4.add(etiNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 60, 30));
+
+        etiNombre7.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre7.setText("Solo letras");
+        jPanel4.add(etiNombre7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 60, 20));
+
+        etiNombre8.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre8.setText("Solo letras");
+        jPanel4.add(etiNombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 60, 20));
+
+        etiNombre9.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre9.setText("Solo números");
+        jPanel4.add(etiNombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 80, 30));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 530, 490));
 
@@ -453,7 +485,11 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_txtControlActionPerformed
 
     private void txtControlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtControlKeyTyped
-
+ char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume(); 
+            etiNombre3.setVisible(true);
+        }
     }//GEN-LAST:event_txtControlKeyTyped
 
     private void txtApellidoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPActionPerformed
@@ -461,7 +497,18 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoPActionPerformed
 
     private void txtApellidoPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPKeyTyped
-        // TODO add your handling code here:
+    
+         char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); 
+                    etiNombre5.setVisible(true);
+                }
+                
+                txtApellidoP.setBackground(Color.WHITE);
+        
+        
+        
+        
     }//GEN-LAST:event_txtApellidoPKeyTyped
 
     private void txtApellidoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMActionPerformed
@@ -469,11 +516,41 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoMActionPerformed
 
     private void txtApellidoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoMKeyTyped
-        // TODO add your handling code here:
+      
+        char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); 
+                    etiNombre6.setVisible(true);
+                }
+                
+                txtApellidoP.setBackground(Color.WHITE);
+
+        
     }//GEN-LAST:event_txtApellidoMKeyTyped
 
     private void txtNumeroTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoKeyTyped
-        // TODO add your handling code here:
+      
+        
+         char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume(); 
+            etiNombre9.setVisible(true);
+        }
+
+          txtNumeroTelefono.setBackground(Color.WHITE);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_txtNumeroTelefonoKeyTyped
 
     private void txtNumeroTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoActionPerformed
@@ -496,7 +573,13 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTutorActionPerformed
 
     private void txtTutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTutorKeyTyped
-        // TODO add your handling code here:
+       char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); 
+                    etiNombre7.setVisible(true);
+                }
+                
+                txtTutor.setBackground(Color.WHITE);
     }//GEN-LAST:event_txtTutorKeyTyped
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
@@ -512,7 +595,21 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_txtOcupacionActionPerformed
 
     private void txtOcupacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOcupacionKeyTyped
-        // TODO add your handling code here:
+      
+        
+          char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); 
+                    etiNombre8.setVisible(true);
+                }
+                
+                txtOcupacion.setBackground(Color.WHITE);
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_txtOcupacionKeyTyped
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
@@ -520,16 +617,61 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-       guardarAlumno();
+       if (txtControl.getText().trim().isEmpty() ||
+        txtApellidoP.getText().trim().isEmpty() ||
+        txtNumeroTelefono.getText().trim().isEmpty() ||
+        txtApellidoM.getText().trim().isEmpty() ||
+        txtTutor.getText().trim().isEmpty() ||
+        txtCorreo.getText().trim().isEmpty() ||
+        txtOcupacion.getText().trim().isEmpty() ||
+        txtNombre.getText().trim().isEmpty() ||
+        txtGrupo.getText().trim().isEmpty()) {
+        
+        // Llamar al método si algún campo está vacío
+        JOptionPane.showMessageDialog(null, "Ingrese todos los datos");
+    } else {
+           guardarAlumno();
+    }
+     
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        ModificarAlumno();
+        if (txtControl.getText().trim().isEmpty() ||
+        txtApellidoP.getText().trim().isEmpty() ||
+        txtNumeroTelefono.getText().trim().isEmpty() ||
+        txtApellidoM.getText().trim().isEmpty() ||
+        txtTutor.getText().trim().isEmpty() ||
+        txtCorreo.getText().trim().isEmpty() ||
+        txtOcupacion.getText().trim().isEmpty() ||
+        txtNombre.getText().trim().isEmpty() ||
+        txtGrupo.getText().trim().isEmpty()) {
+        
+        // Llamar al método si algún campo está vacío
+        JOptionPane.showMessageDialog(null, "Ingrese todos los datos");
+    } else {
+           ModificarAlumno();
+    }
+       
         
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseClicked
-    cargarDatos2();       
+    if (txtControl.getText().trim().isEmpty() ||
+        txtApellidoP.getText().trim().isEmpty() ||
+        txtNumeroTelefono.getText().trim().isEmpty() ||
+        txtApellidoM.getText().trim().isEmpty() ||
+        txtTutor.getText().trim().isEmpty() ||
+        txtCorreo.getText().trim().isEmpty() ||
+        txtOcupacion.getText().trim().isEmpty() ||
+        txtNombre.getText().trim().isEmpty() ||
+        txtGrupo.getText().trim().isEmpty()) {
+        
+        // Llamar al método si algún campo está vacío
+        JOptionPane.showMessageDialog(null, "Ingrese todos los datos");
+    } else {
+         cargarDatos2();
+    }
+               
         //mostrarAlumnoRecienInsertado(txtCorreo.getText());       
     }//GEN-LAST:event_btnEliminar1MouseClicked
 
@@ -538,7 +680,17 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        // TODO add your handling code here:
+       
+         char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); 
+                    etiNombre4.setVisible(true);
+                }
+                
+                txtNombre.setBackground(Color.WHITE);
+        
+        
+        
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void tablaAlumnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAlumnoMouseClicked
@@ -552,14 +704,6 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     private void txtGrupoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGrupoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGrupoKeyTyped
-
-    private void txtBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBoletaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBoletaActionPerformed
-
-    private void txtBoletaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBoletaKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBoletaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -606,6 +750,14 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel btnModificar;
     private javax.swing.JLabel btnVentanaAnterior;
     private com.toedter.calendar.JDateChooser calendario;
+    private javax.swing.JLabel etiNombre2;
+    private javax.swing.JLabel etiNombre3;
+    private javax.swing.JLabel etiNombre4;
+    private javax.swing.JLabel etiNombre5;
+    private javax.swing.JLabel etiNombre6;
+    private javax.swing.JLabel etiNombre7;
+    private javax.swing.JLabel etiNombre8;
+    private javax.swing.JLabel etiNombre9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -617,7 +769,6 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -636,7 +787,6 @@ public final class VistaRegistroAlumno extends javax.swing.JFrame {
     private javax.swing.JTable tablaAlumno;
     private javax.swing.JTextField txtApellidoM;
     private javax.swing.JTextField txtApellidoP;
-    private javax.swing.JTextField txtBoleta;
     private javax.swing.JTextField txtControl;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtGrupo;
@@ -662,6 +812,16 @@ private void Limpiar() {
         txtOcupacion.setText("");
         txtCorreo.setText("");
         txtGrupo.setText("");
+        
+         etiNombre4.setVisible(false);
+         etiNombre5.setVisible(false);
+         etiNombre3.setVisible(false);
+         etiNombre4.setVisible(false);
+         etiNombre6.setVisible(false);
+         etiNombre7.setVisible(false);
+         etiNombre8.setVisible(false);
+         etiNombre9.setVisible(false);
+        
     }
 
 
@@ -699,7 +859,7 @@ public void guardarAlumno() {
                tutor.equals("" ) ||  ocupacion.equals("" ) || numeroTel.equals("" ) || correo.equals("" ) || grupo.equals("" ) ) {
         JOptionPane.showMessageDialog(null, "Complete todos los campos");
     } else {
-        if (!ControladorAlumno.existeAlumno(controlText)) {
+        if (!ContrAlumno.existeAlumno(controlText)) {
             
             alumno.setIdAlumno(control);
             alumno.setNombre(nombre);
@@ -746,7 +906,6 @@ public void ModificarAlumno() {
     String ocupacion = txtOcupacion.getText();
     String grupo = txtGrupo.getText().trim();
     
-    String Idboleta = txtGrupo.getText().trim();
 
     // Validar campos obligatorios
     if (controlText.isEmpty() || nombre.isEmpty() || apellidoP.isEmpty() || apellidoM.isEmpty() || fecha == null ||
@@ -781,8 +940,6 @@ public void ModificarAlumno() {
             alumno.setTelefono(telefono);
             alumno.setCorreo(correo);
             alumno.setIdGrupo(grupo);
-            
-            
 
             // Actualizar el alumno en el controlador
             boolean actualizado = ControladorAlumno.actualizarAlumno(alumno);
@@ -798,7 +955,7 @@ public void ModificarAlumno() {
         }
     } else {
         // Crear un nuevo alumno si no hay una fila seleccionada
-        Alumno alumno = new Alumno(control, nombre, apellidoP, apellidoM, fechaNacimiento, genero, tutor, ocupacion, telefono, correo, grupo );
+        Alumno alumno = new Alumno(control, nombre, apellidoP, apellidoM, fechaNacimiento, genero, tutor, ocupacion, telefono, correo, grupo);
         boolean insertado = ControladorAlumno.insertarAlumno(alumno);
         if (insertado) {
             cargarDatos();

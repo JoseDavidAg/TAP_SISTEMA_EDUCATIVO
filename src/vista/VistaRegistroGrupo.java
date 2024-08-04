@@ -4,25 +4,14 @@
  */
 package vista;
 
-import conexion.Conexion;
 import controlador.ControladorGrupo;
 import java.awt.Color;
-import static java.awt.Color.RED;
+
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import modelo.Alumno;
 import modelo.Grupo;
 /**
  *
@@ -261,15 +250,14 @@ public class VistaRegistroGrupo extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistroGrupo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistroGrupo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaRegistroGrupo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VistaRegistroGrupo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

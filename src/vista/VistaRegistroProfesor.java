@@ -6,13 +6,21 @@ package vista;
 
 
 
+import conexion.Conexion;
 import controlador.ControladorProfesor;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Profesor;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -31,9 +39,21 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Registro Profesor- SISTEMA DE LA INSTITUCIÓN");
         this.setSize(new Dimension (900, 550));
-        cargarDatos();
+         cargarDatos();
         
          
+        etiNombre3.setVisible(false);
+        etiNombre5.setVisible(false);
+        etiNombre6.setVisible(false);
+        etiNombre9.setVisible(false);
+        etiNombre8.setVisible(false);
+        etiNombre2.setVisible(false);
+          //etiNombre7.setVisible(false);
+        
+
+
+
+            
     }
 
     /**
@@ -48,6 +68,7 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
         btnGrupo = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        etiNombre4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -57,6 +78,7 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         btnVentanaAnterior = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        etiNombre2 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtApellidoP = new javax.swing.JTextField();
@@ -73,12 +95,19 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
         txtCedula = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JLabel();
-        btnModificar = new javax.swing.JLabel();
         btnActualizar = new javax.swing.JLabel();
         txtDomicilio = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         txtEspecialidad = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        IdUsuario = new javax.swing.JTextField();
+        etiNombre3 = new javax.swing.JLabel();
+        etiNombre5 = new javax.swing.JLabel();
+        etiNombre6 = new javax.swing.JLabel();
+        etiNombre8 = new javax.swing.JLabel();
+        etiNombre9 = new javax.swing.JLabel();
+        btnModificar = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -93,6 +122,9 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        etiNombre4.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre4.setText("Solo letras");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -140,6 +172,10 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        etiNombre2.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre2.setText("Solo Números");
+        jPanel4.add(etiNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, 20));
+
         jLabel13.setBackground(new java.awt.Color(0, 51, 102));
         jLabel13.setFont(new java.awt.Font("Ebrima", 1, 26)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 51, 102));
@@ -148,6 +184,11 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
 
         txtNombre.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
         txtNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreFocusLost(evt);
+            }
+        });
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -162,6 +203,11 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
 
         txtApellidoP.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
         txtApellidoP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtApellidoP.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtApellidoPFocusLost(evt);
+            }
+        });
         txtApellidoP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoPActionPerformed(evt);
@@ -180,6 +226,11 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
 
         txtNumeroTelefono.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
         txtNumeroTelefono.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNumeroTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNumeroTelefonoFocusLost(evt);
+            }
+        });
         txtNumeroTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumeroTelefonoActionPerformed(evt);
@@ -198,6 +249,11 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
 
         txtApellidoM.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
         txtApellidoM.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtApellidoM.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtApellidoMFocusLost(evt);
+            }
+        });
         txtApellidoM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoMActionPerformed(evt);
@@ -243,7 +299,7 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaProfesor);
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 500, 100));
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 500, 100));
 
         btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btnEli2.png"))); // NOI18N
@@ -254,7 +310,7 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
                 btnEliminarMouseClicked(evt);
             }
         });
-        jPanel4.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, -1, -1));
+        jPanel4.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, -1, 40));
 
         txtCedula.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
         txtCedula.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -283,18 +339,7 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
                 btnGuardarMouseClicked(evt);
             }
         });
-        jPanel4.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
-
-        btnModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btnEd.png"))); // NOI18N
-        btnModificar.setText("Modificar  ");
-        btnModificar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnModificarMouseClicked(evt);
-            }
-        });
-        jPanel4.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, -1, -1));
+        jPanel4.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, 40));
 
         btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizar (1).png"))); // NOI18N
@@ -305,10 +350,15 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
                 btnActualizarMouseClicked(evt);
             }
         });
-        jPanel4.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 430, -1, -1));
+        jPanel4.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, 40));
 
         txtDomicilio.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
         txtDomicilio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtDomicilio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDomicilioFocusLost(evt);
+            }
+        });
         txtDomicilio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDomicilioActionPerformed(evt);
@@ -331,6 +381,11 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
 
         txtEspecialidad.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
         txtEspecialidad.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtEspecialidad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEspecialidadFocusLost(evt);
+            }
+        });
         txtEspecialidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEspecialidadActionPerformed(evt);
@@ -342,6 +397,54 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
             }
         });
         jPanel4.add(txtEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 150, -1));
+
+        jLabel2.setText("IdUsuario");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, -1, -1));
+
+        IdUsuario.setFont(new java.awt.Font("Candara", 0, 14)); // NOI18N
+        IdUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        IdUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IdUsuarioActionPerformed(evt);
+            }
+        });
+        IdUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                IdUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel4.add(IdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 150, -1));
+
+        etiNombre3.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre3.setText("Solo letras");
+        jPanel4.add(etiNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 60, 30));
+
+        etiNombre5.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre5.setText("Solo letras");
+        jPanel4.add(etiNombre5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 60, 30));
+
+        etiNombre6.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre6.setText("Solo letras");
+        jPanel4.add(etiNombre6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 60, 30));
+
+        etiNombre8.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre8.setText("Solo letras");
+        jPanel4.add(etiNombre8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 60, 30));
+
+        etiNombre9.setForeground(new java.awt.Color(255, 0, 0));
+        etiNombre9.setText("Solo Números");
+        jPanel4.add(etiNombre9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, 20));
+
+        btnModificar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btnEd.png"))); // NOI18N
+        btnModificar.setText("Modificar  ");
+        btnModificar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarMouseClicked(evt);
+            }
+        });
+        jPanel4.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, -1, 40));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 530, 470));
 
@@ -358,7 +461,13 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-
+                char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); 
+                    
+                }
+                
+                txtNombre.setBackground(Color.WHITE);
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtApellidoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoPActionPerformed
@@ -366,7 +475,13 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoPActionPerformed
 
     private void txtApellidoPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPKeyTyped
-        // TODO add your handling code here:
+  char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); 
+                  
+                }
+                
+                txtApellidoP.setBackground(Color.WHITE);        // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoPKeyTyped
 
     private void txtApellidoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMActionPerformed
@@ -374,11 +489,23 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtApellidoMActionPerformed
 
     private void txtApellidoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoMKeyTyped
-        // TODO add your handling code here:
+  char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); 
+                    
+                }
+                
+                txtApellidoM.setBackground(Color.WHITE);        // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoMKeyTyped
 
     private void txtNumeroTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoKeyTyped
         // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume(); 
+           
+        }
+
     }//GEN-LAST:event_txtNumeroTelefonoKeyTyped
 
     private void txtNumeroTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoActionPerformed
@@ -398,59 +525,28 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
 
     private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
         // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume(); 
+            etiNombre2.setVisible(true);
+        }
     }//GEN-LAST:event_txtCedulaKeyTyped
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-      eliminarProfesor();
+     eliminarProfesor();
         
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-       guardarProfesor();
+  
+        if (txtDomicilio.getText().isEmpty()||txtApellidoM.getText().isEmpty()||txtNombre.getText().isEmpty()||txtApellidoP.getText().isEmpty()||txtNombre.getText().isEmpty()|| txtApellidoP.getText().isEmpty()){
+        JOptionPane.showMessageDialog(this, "Faltan datos.");
+        }else guardarProfesor();
     }//GEN-LAST:event_btnGuardarMouseClicked
-
-    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-       
-         if (profesorSeleccionado == null){
-        JOptionPane.showMessageDialog(null, "Seleccione un Profesor" );
-       }else {
-           if (txtNombre.getText().isEmpty() || txtApellidoP.getText().isEmpty() ||  txtApellidoM.getText().isEmpty() ||   txtDomicilio.getText().isEmpty() || txtNumeroTelefono.getText().isEmpty() ||  txtEspecialidad.getText().isEmpty() ||  txtCedula.getText().isEmpty()  ){
-            JOptionPane.showMessageDialog(null, "Completa todos los campos" );
-     
-           }else {
-           
-                profesorSeleccionado.setNombre(txtNombre.getText().trim());
-                profesorSeleccionado.setApellidoP(txtApellidoP.getText().trim());
-                profesorSeleccionado.setApellidoM(txtApellidoM.getText().trim());
-                profesorSeleccionado.setDireccion(txtDomicilio.getText().trim());
-                profesorSeleccionado.setTelefono(txtNumeroTelefono.getText().trim());
-                profesorSeleccionado.setEspecialidad(txtEspecialidad.getText().trim());
-                profesorSeleccionado.setCedula(txtCedula.getText().trim());
-                
-                if (ControladorProfesor.actualizarProfesor(profesorSeleccionado, profesorSeleccionado.getCedula())){
-                 JOptionPane.showMessageDialog(null, "Actualización Exitosa!" );
-     
-                 this.cargarDatos();
-                 
-                 this.Limpiar();
-                }else {
-                
-                     JOptionPane.showMessageDialog(null, "¡!" );
-     
-                }
-                
-                
-           }
-       
-       }
-       
-       
-       
-    }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
      
-       cargarDatosss();
+ cargarDatosss();
     }//GEN-LAST:event_btnActualizarMouseClicked
 
     private void txtDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDomicilioActionPerformed
@@ -458,7 +554,7 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDomicilioActionPerformed
 
     private void txtDomicilioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyTyped
-        // TODO add your handling code here:
+   
     }//GEN-LAST:event_txtDomicilioKeyTyped
 
     private void txtEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEspecialidadActionPerformed
@@ -467,23 +563,108 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
 
     private void txtEspecialidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEspecialidadKeyTyped
         // TODO add your handling code here:
+          char c = evt.getKeyChar();
+                if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                    evt.consume(); 
+                    
+                }
+                
+                txtEspecialidad.setBackground(Color.WHITE);   
     }//GEN-LAST:event_txtEspecialidadKeyTyped
 
     private void tablaProfesorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProfesorMouseClicked
-        if (evt.getClickCount() == 2) { // Doble clic en la tabla
-                   int filaSeleccionada = tablaProfesor.getSelectedRow();
-                   if (filaSeleccionada >= 0) {
-                       String cedula = tablaProfesor.getValueAt(filaSeleccionada, 7).toString();
-                       profesorSeleccionado = ControladorProfesor.obtenerProfesorPorCedula(cedula);
-                       if (profesorSeleccionado != null) {
-                           llenarCampos(profesorSeleccionado);
-                       } else {
-                           JOptionPane.showMessageDialog(null, "No se encontró el profesor");
-                       }
-                   }
-               }   
+
+
+
+  cargarDatosEnCampos(tablaProfesor.getSelectedRow());
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     }//GEN-LAST:event_tablaProfesorMouseClicked
 
+    private void IdUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdUsuarioActionPerformed
+
+    private void IdUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IdUsuarioKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdUsuarioKeyTyped
+
+    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
+        try {
+            modificarProfesor();
+        } catch (SQLException ex) {
+            Logger.getLogger(VistaRegistroProfesor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
+    }//GEN-LAST:event_btnModificarMouseClicked
+
+    private void txtNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreFocusLost
+        // TODO add your handling code here:
+        if(txtNombre.getText().trim().isEmpty()){
+            etiNombre3.setVisible(true);
+        }else{
+            etiNombre3.setVisible(false);
+        }
+    }//GEN-LAST:event_txtNombreFocusLost
+
+    private void txtApellidoPFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoPFocusLost
+        // TODO add your handling code here:
+        if(txtApellidoP.getText().trim().isEmpty()){
+            etiNombre5.setVisible(true);
+        }else{
+            etiNombre5.setVisible(false);
+        }
+    }//GEN-LAST:event_txtApellidoPFocusLost
+
+    private void txtApellidoMFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtApellidoMFocusLost
+        // TODO add your handling code here:
+        if(txtApellidoM.getText().trim().isEmpty()){
+            etiNombre6.setVisible(true);
+        }else{
+            etiNombre6.setVisible(false);
+        }
+    }//GEN-LAST:event_txtApellidoMFocusLost
+
+    private void txtDomicilioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDomicilioFocusLost
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtDomicilioFocusLost
+
+    private void txtNumeroTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroTelefonoFocusLost
+        // TODO add your handling code here:
+         if(txtNumeroTelefono.getText().trim().isEmpty()){
+            etiNombre9.setVisible(true);
+        }else{
+            etiNombre9.setVisible(false);
+        }
+    }//GEN-LAST:event_txtNumeroTelefonoFocusLost
+
+    private void txtEspecialidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEspecialidadFocusLost
+        // TODO add your handling code here:
+        if(txtEspecialidad.getText().trim().isEmpty()){
+             etiNombre8.setVisible(true);
+        }else{
+            etiNombre8.setVisible(true);
+        }
+       
+    }//GEN-LAST:event_txtEspecialidadFocusLost
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -519,14 +700,26 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField IdUsuario;
     private javax.swing.JLabel btnActualizar;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.ButtonGroup btnGrupo;
     private javax.swing.JLabel btnGuardar;
     private javax.swing.JLabel btnModificar;
     private javax.swing.JLabel btnVentanaAnterior;
+    private javax.swing.JLabel etiNombre2;
+    private javax.swing.JLabel etiNombre3;
+    private javax.swing.JLabel etiNombre4;
+    private javax.swing.JLabel etiNombre5;
+    private javax.swing.JLabel etiNombre6;
+    private javax.swing.JLabel etiNombre8;
+    private javax.swing.JLabel etiNombre9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -535,6 +728,7 @@ public class VistaRegistroProfesor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -569,89 +763,94 @@ private void Limpiar() {
         txtNumeroTelefono.setText("");
         txtCedula.setText("");
         txtEspecialidad.setText("");
+        etiNombre3.setVisible(false);
+        etiNombre5.setVisible(false);
+        etiNombre6.setVisible(false);
+        etiNombre9.setVisible(false);
+        etiNombre8.setVisible(false);
+        etiNombre2.setVisible(false);
     }
 
 
-public void guardarProfesor() {
 
-    Profesor profesor = new Profesor();
-    ControladorProfesor ContrProfesor = new ControladorProfesor();
+private void guardarProfesor() {
+      
+        String nombre = txtNombre.getText();
+        String apellidoP = txtApellidoP.getText();
+        String apellidoM = txtApellidoM.getText();
+        String direccion = txtDomicilio.getText();
+        String telefono = txtNumeroTelefono.getText();
+        String especialidad = txtEspecialidad.getText();
+        int cedula = Integer.parseInt(txtCedula.getText());
+        int idUsuario = Integer.parseInt(IdUsuario.getText());
 
-    String nombre = txtNombre.getText().trim();
-    String apellidoP = txtApellidoP.getText().trim();
-    String apellidoM = txtApellidoM.getText().trim();
-    String direccion = txtDomicilio.getText().trim();
-    String telefono = txtNumeroTelefono.getText().trim();
-    String especialidad = txtEspecialidad.getText().trim();
-    String cedula = txtCedula.getText().trim();
-  
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        
 
-    if (nombre.equals("") || apellidoP.equals("") || apellidoM.equals("") || direccion.equals ("") || telefono.equals("") || 
-               especialidad.equals("" ) ||  cedula.equals("" )) {
-        JOptionPane.showMessageDialog(null, "Complete todos los campos");
-    } else {
-        if (!ContrProfesor.existeProfesor(cedula)) {
-            profesor.setNombre(nombre);
-            profesor.setApellidoP(apellidoP);
-            profesor.setApellidoM(apellidoM);
-            profesor.setDireccion(direccion);
-            profesor.setTelefono(telefono);
-            profesor.setEspecialidad(especialidad);
-            profesor.setCedula(cedula);
+        try {
+            // Obtener la conexión desde la clase DatabaseConnection
+            //conn = Conexion.getConnection();
+            conn = Conexion.conectar();
            
+            // Crear la sentencia SQL para insertar los datos
+            String sql = "INSERT INTO tb_profesor (nombre, apellidoP, apellidoM, direccion, telefono, especialidad, cedula, IdUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(sql);
+            
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, apellidoP);
+            pstmt.setString(3, apellidoM);
+            pstmt.setString(4, direccion);
+            pstmt.setString(5, telefono);
+            pstmt.setString(6, especialidad);
+            pstmt.setInt(7, cedula);
+            pstmt.setInt(8, idUsuario);
 
-            if (ContrProfesor.insertarProfesor(profesor)) {
-                JOptionPane.showMessageDialog(null, "Profesor guardado correctamente");
-                Limpiar();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar el profesor");
+            // Ejecutar la sentencia SQL
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Profesor guardado exitosamente");
+            
+            Limpiar();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al guardar el profesor: " + e.getMessage());
+        } finally {
+            // Cerrar recursos
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Ya existe un alumno con ese nombre completo");
         }
-    }
-    
 }
 
 
 
 
-public void cargarDatos() {
-    
-    List<Profesor> listaProfesor = ControladorProfesor.obtenerProfesor();
-    DefaultTableModel modeloTabla = new DefaultTableModel(
-    new String[]{"Nombre", "Apellido paterno", "Apellido materno", "Domicilio", "Teléfono", "Especialidad", "Cédula"}, 0);
-
-    modeloTabla.setRowCount(0);
-       
-        for (Profesor profesor : listaProfesor) {
-            modeloTabla.addRow (new  Object[]{
-                profesor.getNombre(),
-                profesor.getApellidoP(),
-                profesor.getApellidoM(),
-                profesor.getDireccion(),
-                profesor.getTelefono(),
-                profesor.getEspecialidad(),
-                profesor.getCedula(),    
-                    
-            });
-        }
-         tablaProfesor.setModel(modeloTabla);
-    }
+ 
+private void cargarDatosProfesor(Profesor profesor) {
+    txtNombre.setText(profesor.getNombre());
+    txtApellidoP.setText(profesor.getApellidoP());
+    txtApellidoM.setText(profesor.getApellidoM());
+    txtDomicilio.setText(profesor.getDireccion());
+    txtNumeroTelefono.setText(profesor.getTelefono());
+    txtEspecialidad.setText(profesor.getEspecialidad());
+    txtCedula.setText(String.valueOf(profesor.getCedula()));  // Conversión correcta de int a String
+    IdUsuario.setText(String.valueOf(profesor.getIdUsuario())); // Conversión correcta de int a String
+}
 
 
-
-
-
-  
 
 public void eliminarProfesor() {
     int selectedRow = tablaProfesor.getSelectedRow();
     if (selectedRow >= 0) {
-        String cedulaSeleccionada = tablaProfesor.getValueAt(selectedRow, 6).toString(); 
-        
+        // Obtener la cédula como int
+        int cedulaSeleccionada = (int) tablaProfesor.getValueAt(selectedRow, 6);
+
         int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este profesor?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
+            // Llamar al método de eliminarProfesor con la cédula como int
             boolean eliminado = ControladorProfesor.eliminarProfesor(cedulaSeleccionada);
             if (eliminado) {
                 cargarDatos();
@@ -668,13 +867,40 @@ public void eliminarProfesor() {
 
 
 
-    public void cargarDatosss() {
+public void cargarDatos() {
+    
+    List<Profesor> listaProfesor = ControladorProfesor.obtenerProfesor();
+    DefaultTableModel modeloTabla = new DefaultTableModel(
+    new String[]{"Nombre", "Apellido paterno", "Apellido materno", "Domicilio", "Teléfono", "Especialidad", "Cédula", "IdUsuario"}, 0);
+
+    modeloTabla.setRowCount(0);
+       
+        for (Profesor profesor : listaProfesor) {
+            modeloTabla.addRow (new  Object[]{
+                profesor.getNombre(),
+                profesor.getApellidoP(),
+                profesor.getApellidoM(),
+                profesor.getDireccion(),
+                profesor.getTelefono(),
+                profesor.getEspecialidad(),
+                profesor.getCedula(),    
+                profesor.getIdUsuario(),   
+                    
+            });
+        }
+         tablaProfesor.setModel(modeloTabla);
+    }
+
+
+
+
+ public void cargarDatosss() {
         List<Profesor> listaProfesor = ControladorProfesor.obtenerProfesor();
         DefaultTableModel model = (DefaultTableModel) tablaProfesor.getModel();
         model.setRowCount(0);
 
         for (Profesor profesor : listaProfesor) {
-            Object[] row = new Object[7];
+            Object[] row = new Object[8];
 
              row[0] = profesor.getNombre();   
              row[1] = profesor.getApellidoP();
@@ -683,86 +909,170 @@ public void eliminarProfesor() {
              row[4] = profesor.getTelefono();
              row[5] = profesor.getEspecialidad();
              row[6] = profesor.getCedula();
+             row[7] = profesor.getIdUsuario();
 
             model.addRow(row);
         }
     }
 
-    
 
-    private void llenarCampos(Profesor profesor) {
+
+private void modificarProfesorES() {
+        String nombre = txtNombre.getText().trim();
+        String apellidoP = txtApellidoP.getText().trim();
+        String apellidoM = txtApellidoM.getText().trim();
+        String direccion = txtDomicilio.getText().trim();
+        String telefono = txtNumeroTelefono.getText().trim();
+        String especialidad = txtEspecialidad.getText().trim();
+         
         
-    txtNombre.setText(profesor.getNombre());
-    txtApellidoP.setText(profesor.getApellidoP());
-    txtApellidoM.setText(profesor.getApellidoM());
-    txtDomicilio.setText(profesor.getDireccion());
-    txtNumeroTelefono.setText(profesor.getTelefono());
-    txtEspecialidad.setText(profesor.getEspecialidad());
-    txtCedula.setText(profesor.getCedula());
-    
-    }
+        String cedulaText = txtCedula.getText().trim();
+        int cedula = Integer.parseInt(cedulaText); 
+        
+         String IdUsuarioText = IdUsuario.getText().trim();
+        int IdUsuario = Integer.parseInt(IdUsuarioText); 
+        
+        
+        
+        // Validar campos obligatorios
+        if (nombre.isEmpty() || apellidoP.isEmpty() || apellidoM.isEmpty() || direccion.isEmpty() ||
+            telefono.isEmpty() || especialidad.isEmpty() || cedulaText.isEmpty() || IdUsuarioText.isEmpty()  ) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
+        // Mostrar cuadro de diálogo de confirmación
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea realizar estos cambios?", "Confirmar Cambios", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return; // Salir si el usuario no confirma
+        }
 
+        int selectedRow = tablaProfesor.getSelectedRow();
+        if (selectedRow >= 0) {
+            // Obtener el ID del profesor seleccionado
+            int idUsuario = (int) tablaProfesor.getValueAt(selectedRow, 0);
 
+            // Obtener el objeto Profesor a partir del ID
+            Profesor profesor = new Profesor();
+            
+           
+            profesor.setNombre(nombre);
+            profesor.setApellidoP(apellidoP);
+            profesor.setApellidoM(apellidoM);
+            profesor.setDireccion(direccion);
+            profesor.setTelefono(telefono);
+            profesor.setEspecialidad(especialidad);
+            profesor.setCedula(cedula);
+            profesor.setIdUsuario(idUsuario);
 
-
-}
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
-
- private void modificarProfesor() {
-        int filaSeleccionada = tablaProfesor.getSelectedRow();
-        if (filaSeleccionada != -1) {
-            String cedula = txtCedula.getText(); 
-
-           // Profesor profesor = new Profesor(
-               
-                txtNombre.getText(),
-                txtApellidoP.getText(),
-                txtApellidoM.getText(),
-                txtDomicilio.getText(),
-                txtNumeroTelefono.getText(),
-                txtEspecialidad.getText(),
-                cedula
-            );
-
-            boolean exito = ControladorProfesor.modificarProfesor(profesor);
-            if (exito) {
-                JOptionPane.showMessageDialog(null, "Profesor modificado exitosamente");
-                
-                
-                tablaProfesor.setValueAt(profesor.getNombre(), filaSeleccionada, 1);
-                tablaProfesor.setValueAt(profesor.getApellidoP(), filaSeleccionada, 2);
-                tablaProfesor.setValueAt(profesor.getApellidoM(), filaSeleccionada, 3);
-                tablaProfesor.setValueAt(profesor.getDireccion(), filaSeleccionada, 4);
-                tablaProfesor.setValueAt(profesor.getTelefono(), filaSeleccionada, 5);
-                tablaProfesor.setValueAt(profesor.getEspecialidad(), filaSeleccionada, 6);
-                tablaProfesor.setValueAt(profesor.getCedula(), filaSeleccionada, 7);
+            // Actualizar el profesor en el controlador
+            boolean actualizado = ControladorProfesor.actualizarProfesor(profesor);
+            if (actualizado) {
+                cargarDatos();
+                Limpiar();
+                JOptionPane.showMessageDialog(this, "Datos actualizados correctamente.");
             } else {
-                JOptionPane.showMessageDialog(null, "Error al modificar el profesor" );
+                JOptionPane.showMessageDialog(this, "Error al actualizar los datos del profesor.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un profesor de la tabla");
+            JOptionPane.showMessageDialog(this, "Seleccione un profesor de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
 
 
 
+ 
+ 
+ private void cargarDatosEnCampos(int row) {
+    txtNombre.setText((String) tablaProfesor.getValueAt(row, 0));
+    txtApellidoP.setText((String) tablaProfesor.getValueAt(row, 1));
+    txtApellidoM.setText((String) tablaProfesor.getValueAt(row, 2));
+    txtDomicilio.setText((String) tablaProfesor.getValueAt(row, 3));
+    txtNumeroTelefono.setText((String) tablaProfesor.getValueAt(row, 4));
+    txtEspecialidad.setText((String) tablaProfesor.getValueAt(row, 5));
+    txtCedula.setText(String.valueOf(tablaProfesor.getValueAt(row, 6)));
+    IdUsuario.setText(String.valueOf(tablaProfesor.getValueAt(row, 7))); // Suponiendo que IdUsuario también es un JTextField
+}
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+   
+ private void modificarProfesor() throws SQLException {
+    String nombre = txtNombre.getText().trim();
+    String apellidoP = txtApellidoP.getText().trim();
+    String apellidoM = txtApellidoM.getText().trim();
+    String direccion = txtDomicilio.getText().trim();
+    String telefono = txtNumeroTelefono.getText().trim();
+    String especialidad = txtEspecialidad.getText().trim();
+    String cedulaText = txtCedula.getText().trim();
+    int cedula = cedulaText.isEmpty() ? 0 : Integer.parseInt(cedulaText);
+
+    String IdUsuarioText = IdUsuario.getText().trim();
+    int IdUsuario = IdUsuarioText.isEmpty() ? 0 : Integer.parseInt(IdUsuarioText);
+
+    // Validar campos obligatorios
+    if (nombre.isEmpty() || apellidoP.isEmpty() || apellidoM.isEmpty() || direccion.isEmpty() ||
+        telefono.isEmpty() || especialidad.isEmpty() || cedulaText.isEmpty() || IdUsuarioText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Mostrar cuadro de diálogo de confirmación
+    int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea realizar estos cambios?", "Confirmar Cambios", JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) {
+        return; // Salir si el usuario no confirma
+    }
+
+    // Obtener la cédula desde la tabla
+    int selectedRow = tablaProfesor.getSelectedRow();
+    if (selectedRow >= 0) {
+        // Obtener la cédula de la tabla
+        int cedulaSeleccionada = (int) tablaProfesor.getValueAt(selectedRow, 6);
+
+        // Obtener el objeto Profesor a partir de la cédula
+        Profesor profesor = ControladorProfesor.getProfesorPorCedula(cedulaSeleccionada);
+        if (profesor != null) {
+            // Actualizar los campos del objeto Profesor
+            profesor.setNombre(nombre);
+            profesor.setApellidoP(apellidoP);
+            profesor.setApellidoM(apellidoM);
+            profesor.setDireccion(direccion);
+            profesor.setTelefono(telefono);
+            profesor.setEspecialidad(especialidad);
+            profesor.setCedula(cedula); // Asegúrate de que la cédula sea la correcta
+            profesor.setIdUsuario(IdUsuario);
+
+            // Actualizar el profesor en el controlador
+            boolean actualizado = ControladorProfesor.actualizarProfesor(profesor);
+            if (actualizado) {
+                cargarDatos();
+                Limpiar();
+                JOptionPane.showMessageDialog(this, "Datos actualizados correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al actualizar los datos del profesor.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró un profesor con la cédula proporcionada.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione un profesor de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+ 
+ 
+
+
+
+
+
+
 
 }
- */
+

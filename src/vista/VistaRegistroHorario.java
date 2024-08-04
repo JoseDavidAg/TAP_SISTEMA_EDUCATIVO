@@ -949,10 +949,10 @@ public class VistaRegistroHorario extends javax.swing.JFrame {
                 String direccion = resultSet.getString("direccion");
                 String telefono = resultSet.getString("telefono");
                 String especialidad = resultSet.getString("especialidad");
-                String cedula = resultSet.getString("cedula");
+                int cedula = resultSet.getInt("cedula");
                 int IdUsuario = resultSet.getInt("IdUsuario");
                 
-                String profesor = new Profesor(idProfesor, nombre, apellidoP, apellidoM, direccion, telefono, especialidad, cedula, IdUsuario).toString();
+                String profesor = new Profesor( nombre, apellidoP, apellidoP, direccion, telefono, especialidad, cedula, IdUsuario).toString();
 
                 // Agrega el profesor a cada JComboBox
                 for (JComboBox<String> comboBox : comboBoxes) {

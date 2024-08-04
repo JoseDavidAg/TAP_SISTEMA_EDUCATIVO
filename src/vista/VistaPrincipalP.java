@@ -4,7 +4,9 @@
  */
 package vista;
 
+
 import java.awt.Dimension;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +40,6 @@ public class VistaPrincipalP extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btnProfesor = new javax.swing.JButton();
-        btnHorario = new javax.swing.JButton();
         btnGrupo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnMateria = new javax.swing.JButton();
@@ -46,6 +47,9 @@ public class VistaPrincipalP extends javax.swing.JFrame {
         btnCerrarSesion = new javax.swing.JButton();
         btnAlumno3 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
+        btnMateria1 = new javax.swing.JButton();
+        btnHorario1 = new javax.swing.JButton();
+        btnHorario = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -72,19 +76,6 @@ public class VistaPrincipalP extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btnProfesor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 220, 50));
-
-        btnHorario.setBackground(new java.awt.Color(0, 51, 153));
-        btnHorario.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
-        btnHorario.setForeground(new java.awt.Color(255, 255, 255));
-        btnHorario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hr.png"))); // NOI18N
-        btnHorario.setText("Horari0");
-        btnHorario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnHorario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHorarioActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 220, 50));
 
         btnGrupo.setBackground(new java.awt.Color(0, 51, 153));
         btnGrupo.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
@@ -126,7 +117,7 @@ public class VistaPrincipalP extends javax.swing.JFrame {
                 btnAlumno1ActionPerformed(evt);
             }
         });
-        jPanel3.add(btnAlumno1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 220, 50));
+        jPanel3.add(btnAlumno1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 220, 30));
 
         btnCerrarSesion.setBackground(new java.awt.Color(0, 51, 153));
         btnCerrarSesion.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
@@ -160,6 +151,45 @@ public class VistaPrincipalP extends javax.swing.JFrame {
         jLabel16.setText("EscuelaConnect ");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
 
+        btnMateria1.setBackground(new java.awt.Color(0, 51, 153));
+        btnMateria1.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        btnMateria1.setForeground(new java.awt.Color(255, 255, 255));
+        btnMateria1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/libros.png"))); // NOI18N
+        btnMateria1.setText("Materia");
+        btnMateria1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMateria1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMateria1MouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnMateria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 220, 50));
+
+        btnHorario1.setBackground(new java.awt.Color(0, 51, 153));
+        btnHorario1.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        btnHorario1.setForeground(new java.awt.Color(255, 255, 255));
+        btnHorario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hr.png"))); // NOI18N
+        btnHorario1.setText("Horari0");
+        btnHorario1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnHorario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHorario1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnHorario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 220, 50));
+
+        btnHorario.setBackground(new java.awt.Color(0, 51, 153));
+        btnHorario.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        btnHorario.setForeground(new java.awt.Color(255, 255, 255));
+        btnHorario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/hr.png"))); // NOI18N
+        btnHorario.setText("Horario-Profesor");
+        btnHorario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHorarioActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 220, 30));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 510));
 
         jPanel4.setBackground(new java.awt.Color(0, 51, 153));
@@ -176,7 +206,7 @@ public class VistaPrincipalP extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addComponent(jLabel13)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,11 +273,25 @@ public class VistaPrincipalP extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGrupoActionPerformed
 
     private void btnHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHorarioActionPerformed
-        VistaRegistroHorario VistoHorario = new VistaRegistroHorario();
-        VistoHorario.setVisible(true);
-        this.dispose(); 
+       ScheduleFrame vista = null;
+        try {
+            vista = new ScheduleFrame();
+        } catch (SQLException ex) {
+            Logger.getLogger(VistaPrincipalP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      vista.setVisible(true);
+      this.dispose();
+               
         
     }//GEN-LAST:event_btnHorarioActionPerformed
+
+    private void btnMateria1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMateria1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMateria1MouseClicked
+
+    private void btnHorario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHorario1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHorario1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,7 +335,9 @@ public class VistaPrincipalP extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnGrupo;
     private javax.swing.JButton btnHorario;
+    private javax.swing.JButton btnHorario1;
     private javax.swing.JButton btnMateria;
+    private javax.swing.JButton btnMateria1;
     private javax.swing.JButton btnProfesor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;

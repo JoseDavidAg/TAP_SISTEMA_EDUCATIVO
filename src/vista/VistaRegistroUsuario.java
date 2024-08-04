@@ -488,11 +488,7 @@ public class VistaRegistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_lbOjoMouseClicked
 
     private void ComboTipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ComboTipoFocusLost
-       if(ComboTipo.getSelectedIndex()==0){
-            lblObligatorio3.setVisible(true);
-        }else{
-            lblObligatorio3.setVisible(false);
-        }
+       
     }//GEN-LAST:event_ComboTipoFocusLost
 
     private void txtUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusLost

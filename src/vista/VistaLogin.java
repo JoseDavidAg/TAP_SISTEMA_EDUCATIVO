@@ -352,7 +352,8 @@ private void Login2() throws Exception {
         PasswordUtil encrip= new PasswordUtil();
         Usuario usuario = new Usuario();
         usuario.setCorreo(txtUsuario.getText().trim());
-        usuario.setContraseña(encrip.hashPassword(txtContraseña.getText().trim()));
+        String c= new String(txtContraseña.getPassword());
+        usuario.setContraseña(encrip.hashPassword(c));
 
         //System.out.println("Intentando obtener el tipo de usuario...");
         String tipoUsuario = ControladorLogin.obtenerTipoUsuario(usuario);

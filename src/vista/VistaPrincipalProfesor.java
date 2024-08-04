@@ -11,7 +11,6 @@ package vista;
  */
 
 import conexion.Conexion;
-import controlador.ControladorProfesor;
 import java.sql.*;
 import controlador.ControladorVistaProfesor;
 import java.awt.Dimension;
