@@ -29,11 +29,11 @@ Cuenta con los siguientes paquetes
 • vista: Contiene las clases VistaLogin.java, VistaModificarUsuario.java, VistaPrincipalAlumno.java, VistaPrincipalP.java, etc. Corresponde a las diferentes interfaces de usuario, la 
   vista que tiene el usurio.
 
-### Modelo 
+### MODELO 
 
 En el paquete MODELO contiene las clases de las tablas principales que se utilizaron en la base de datos como: Alumno, Grupo, Materia, Profesor, Usuario; dentro de cada uno están sus atributos, su constructor y los métodos get y set de cada atributo. 
 
-### Controlador
+### CONTROLADOR
 
 En el paquete controlador hay clases- controladores de cada entidad que se encuentra en el paquete modelo, como también algunas que se encuentran en el paquete de VISTA. Y en este sistema los controladores se encargan de gestionar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para la entidades que tenemos en la base de datos.
 
@@ -208,8 +208,11 @@ Por ejemplo la clase ControladorAlumno, que es parecida a los demás controlador
 ##### insertarAlumno(Alumno alumno)
 
   ++  Descripción: Inserta un nuevo registro de alumno en la base de datos.
+  
   ++  Parámetros: Un objeto Alumno.
+  
   ++  Retorno: true si la inserción fue exitosa, false en caso contrario.
+  
   ++  Lógica:
       Conecta con la base de datos.
       Prepara una declaración SQL para insertar un nuevo alumno.
@@ -219,8 +222,11 @@ Por ejemplo la clase ControladorAlumno, que es parecida a los demás controlador
 ##### existeAlumno(String control)
 
   ++ Descripción: Verifica si un alumno existe en la base de datos por su Id.
+  
   ++ Parámetros: Un String que representa el Id del alumno.
+  
   ++ Retorno: true si el alumno existe, false en caso contrario.
+  
   ++ Lógica:
       Conecta con la base de datos.
       Prepara una declaración SQL para contar los registros con el Id del alumno proporcionado.
@@ -229,8 +235,11 @@ Por ejemplo la clase ControladorAlumno, que es parecida a los demás controlador
 ##### obtenerAlumnos()
 
   ++ Descripción: Obtiene una lista de todos los alumnos en la base de datos.
+  
   ++ Parámetros: Ninguno.
+  
   ++ Retorno: Una lista de objetos Alumno.
+  
   ++ Lógica:
       Conecta con la base de datos.
       Prepara una declaración SQL para seleccionar todos los alumnos.
@@ -239,8 +248,11 @@ Por ejemplo la clase ControladorAlumno, que es parecida a los demás controlador
 ##### actualizarAlumno(Alumno alumno)
 
   ++ Descripción: Actualiza los datos de un alumno existente en la base de datos.
+  
   ++ Parámetros: Un objeto Alumno.
+  
   ++ Retorno: true si la actualización fue exitosa, false en caso contrario.
+  
   ++ Lógica:
     Conecta con la base de datos.
     Prepara una declaración SQL para actualizar los datos del alumno.
@@ -250,8 +262,11 @@ Por ejemplo la clase ControladorAlumno, que es parecida a los demás controlador
 ##### getAlumno(String control)
 
   ++ Descripción: Obtiene los datos de un alumno específico por su Id.
+  
   ++ Parámetros: Un String que representa el Id del alumno.
+  
   ++ Retorno: Un objeto Alumno si se encuentra, null en caso contrario.
+  
   ++ Lógica:
   Conecta con la base de datos.
   Prepara una declaración SQL para seleccionar un alumno por su Id.
@@ -261,13 +276,123 @@ Por ejemplo la clase ControladorAlumno, que es parecida a los demás controlador
 ##### eliminarAlumno(String control)
 
   ++ Descripción: Elimina un alumno de la base de datos por su Id.
+  
   ++ Parámetros: Un String que representa el Id del alumno.
+  
   ++ Retorno: true si la eliminación fue exitosa, false en caso contrario.
+  
   ++ Lógica:
   Conecta con la base de datos.
   Prepara una declaración SQL para eliminar el alumno con el Id proporcionado.
   Ejecuta la eliminación y verifica si se afectaron filas.
+
+#### PasswordUtil
+
+Esta clase la manejamos para incriptar la contraseña, pues define dos métodos para manejar el hashing de contraseñas y su verificación durante el inicio de sesión. Estos métodos son cruciales para garantizar la seguridad de las contraseñas almacenadas y verificarlas correctamente cuando un usuario intenta iniciar sesión.
+
+
+
+
   
+
+### VISTA
+  
+#### Vista Login 
+
+En esta vista 
+
+##### Componentes y Diseño de la Interfaz
+
+
+El constructor VistaLogin() configura la ventana inicial:
+
+Deshabilita el redimensionamiento (setResizable(false)).
+
+Centra la ventana en la pantalla (setLocationRelativeTo(null)).
+
+Establece el título de la ventana (setTitle("Login- SISTEMA DE LA INSTITUCIÓN")).
+
+Fija el tamaño de la ventana (setSize(new Dimension(900, 560))).
+
+++ Inicialización de Componentes (initComponents())
+
+Define y configura los paneles (jPanel1, jPanel3, jPanel4).
+Agrega etiquetas (jLabel2, jLabel4, jLabel6, etc.) y botones (btnIngreso, btnUnir1).
+Configura los campos de texto para el usuario (txtUsuario) y la contraseña (txtContraseña).
+Configura el evento para el botón de inicio de sesión (btnIngreso), el botón de registro (btnUnir1), y el evento para mostrar/ocultar la contraseña (lbOjo).
+
+
+##### Eventos y Funcionalidades
+
+
+btnIngresoActionPerformed(evt):
+
+Llama al método Login2() para gestionar el proceso de inicio de sesión.
+Limpia los campos de texto del usuario y la contraseña después del intento de inicio de sesión.
+
+btnUnir1ActionPerformed(evt):
+
+Abre la ventana de registro de usuario (VistaRegistroUsuario) y cierra la ventana actual.
+
+lbOjoMouseClicked(evt):
+
+Alterna la visibilidad de la contraseña entre oculta y visible.
+Método de Login
+
+Login2():
+Verifica que los campos de usuario y contraseña no estén vacíos.
+Crea un objeto Usuario y establece el correo y la contraseña encriptada.
+Llama a ControladorLogin.obtenerTipoUsuario(usuario) para obtener el tipo de usuario (Administrador, Alumno, Profesor).
+Según el tipo de usuario, abre la ventana correspondiente (VistaPrincipalP, VistaPrincipalAlumno, VistaPrincipalProfesor).
+Si no se reconoce el tipo de usuario o los datos son incorrectos, muestra un mensaje de error.
+
+#### VistaModificarUsuario
+
+Para esta interfaz tenemos la vista del CRUD, desde aquí el usurio puede ingresar datos y guardar un nuevo usuario, modificar los usuarios que ya existen y que se encuentran guardados en la base de datos, dando clic al usuario que se muestra en la tabla se rellenan los campos, se cambia el dato que queremos cambiar y damos clic en modificar, en está tambien se muestran etiquetas para que el usuario tenga un mejor entendimiento, se muestra un etiqueta que dice "solo letras" si el usuario quiere ingresar un número en el camposo que pide su nombre y apellidos; tambien se puede eliminar un usuario y actualizar la tabla para verificar que ya se ah ingresado un nuevo usuario.
+![image](https://github.com/user-attachments/assets/9679696d-2513-4eda-9119-37a3aa1f6fd4)
+
+#### VistaRegistroAlumno
+Esta vista es perecida a la de modificar usuario, pues también se muestra el CRUD y como está tambien se encuentra la de VistaRegistroProfesor que añadé un nuevo profesor, edita, elimina y actualiza. 
+![image](https://github.com/user-attachments/assets/bd3a5416-f616-4867-87e0-9ec39358e216)
+
+![image](https://github.com/user-attachments/assets/5fb9ed19-c858-4210-8eb1-5b047f482226)
+
+
+#### VistaPrincipalA
+
+Como tenemos dos nieveles de usuario, lo que es el Administrador y el profesor; desde la vista del administrador se puede agregar nuevos alumnos, profesores, materias, grupos, usuarios y cerrar sesión.
+![image](https://github.com/user-attachments/assets/3904df74-518b-4df9-b0d7-a80826af9801)
+
+#### VistaProfesor
+
+Para la vista prinicpal del Profesor, la que ve un usuario de tipo profesor es 
+en la parte de la izquierda hay un componente de tipo comboBox, donde se muestran los grupos que el profesor tiene asignado y al momento de dar clic en el grupo, se muetra y se rellanan los datos de los alumnos en la tabla que se encuentra en la parte de la derecha de la interfaz. 
+
+Y que al momento de dar clic en este alumno, podemos tambien dar clic en el botón generar boleta y automáticamente se le envía por correo electrónico la boleta del alumno seleccionado a su tutor.
+![image](https://github.com/user-attachments/assets/f65be840-1c9b-4f76-aaf3-260128d8b867)
+
+
+Así como un botón de cerrar sesión. 
+
+
+#### ScheduleFrame
+
+La clase ScheduleFrame configura una GUI para asignar horarios a profesores.
+
+Obtiene datos de profesores de una base de datos, inicializa componentes de la GUI y configura el manejo de eventos.
+
+El horario puede ser editado a través de una tabla con combo boxes para materias y grupos.
+
+El botón de guardar actualmente imprime el horario en la consola, pero esto puede ser extendido para guardar los datos en una base de datos.
+
+
+##### Colaboradores: 
+
+Nayeli Itzel Caballero García
+Jose David Ambrosio Gonzalez
+
+
+
 
 
 
