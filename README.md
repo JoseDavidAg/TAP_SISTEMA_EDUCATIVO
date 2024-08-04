@@ -205,62 +205,68 @@ Por ejemplo la clase ControladorAlumno, que es parecida a los demás controlador
 
 #### Métodos de la Clase ControladorAlumno
 
-insertarAlumno(Alumno alumno)
+##### insertarAlumno(Alumno alumno)
 
-  Descripción: Inserta un nuevo registro de alumno en la base de datos.
-  Parámetros: Un objeto Alumno.
-  Retorno: true si la inserción fue exitosa, false en caso contrario.
-  Lógica:
+  ++  Descripción: Inserta un nuevo registro de alumno en la base de datos.
+  ++  Parámetros: Un objeto Alumno.
+  ++  Retorno: true si la inserción fue exitosa, false en caso contrario.
+  ++  Lógica:
+      Conecta con la base de datos.
+      Prepara una declaración SQL para insertar un nuevo alumno.
+      Asigna los valores de los atributos del objeto Alumno a la declaración SQL.
+      Ejecuta la inserción y verifica si se afectaron filas.
+      
+##### existeAlumno(String control)
+
+  ++ Descripción: Verifica si un alumno existe en la base de datos por su Id.
+  ++ Parámetros: Un String que representa el Id del alumno.
+  ++ Retorno: true si el alumno existe, false en caso contrario.
+  ++ Lógica:
+      Conecta con la base de datos.
+      Prepara una declaración SQL para contar los registros con el Id del alumno proporcionado.
+      Ejecuta la consulta y verifica si el conteo es mayor a cero.
+     
+##### obtenerAlumnos()
+
+  ++ Descripción: Obtiene una lista de todos los alumnos en la base de datos.
+  ++ Parámetros: Ninguno.
+  ++ Retorno: Una lista de objetos Alumno.
+  ++ Lógica:
+      Conecta con la base de datos.
+      Prepara una declaración SQL para seleccionar todos los alumnos.
+      Ejecuta la consulta y recorre el ResultSet para llenar la lista de alumnos.
+
+##### actualizarAlumno(Alumno alumno)
+
+  ++ Descripción: Actualiza los datos de un alumno existente en la base de datos.
+  ++ Parámetros: Un objeto Alumno.
+  ++ Retorno: true si la actualización fue exitosa, false en caso contrario.
+  ++ Lógica:
+    Conecta con la base de datos.
+    Prepara una declaración SQL para actualizar los datos del alumno.
+    Asigna los valores de los atributos del objeto Alumno a la declaración SQL.
+    Ejecuta la actualización y verifica si se afectaron filas.
+    
+##### getAlumno(String control)
+
+  ++ Descripción: Obtiene los datos de un alumno específico por su Id.
+  ++ Parámetros: Un String que representa el Id del alumno.
+  ++ Retorno: Un objeto Alumno si se encuentra, null en caso contrario.
+  ++ Lógica:
   Conecta con la base de datos.
-  Prepara una declaración SQL para insertar un nuevo alumno.
-  Asigna los valores de los atributos del objeto Alumno a la declaración SQL.
-  Ejecuta la inserción y verifica si se afectaron filas.
-  existeAlumno(String control)
+  Prepara una declaración SQL para seleccionar un alumno por su Id.
+  Ejecuta la consulta y asigna los valores del ResultSet a un objeto Alumno.
 
-Descripción: Verifica si un alumno existe en la base de datos por su Id.
-Parámetros: Un String que representa el Id del alumno.
-Retorno: true si el alumno existe, false en caso contrario.
-Lógica:
-Conecta con la base de datos.
-Prepara una declaración SQL para contar los registros con el Id del alumno proporcionado.
-Ejecuta la consulta y verifica si el conteo es mayor a cero.
-obtenerAlumnos()
 
-Descripción: Obtiene una lista de todos los alumnos en la base de datos.
-Parámetros: Ninguno.
-Retorno: Una lista de objetos Alumno.
-Lógica:
-Conecta con la base de datos.
-Prepara una declaración SQL para seleccionar todos los alumnos.
-Ejecuta la consulta y recorre el ResultSet para llenar la lista de alumnos.
-actualizarAlumno(Alumno alumno)
+##### eliminarAlumno(String control)
 
-Descripción: Actualiza los datos de un alumno existente en la base de datos.
-Parámetros: Un objeto Alumno.
-Retorno: true si la actualización fue exitosa, false en caso contrario.
-Lógica:
-Conecta con la base de datos.
-Prepara una declaración SQL para actualizar los datos del alumno.
-Asigna los valores de los atributos del objeto Alumno a la declaración SQL.
-Ejecuta la actualización y verifica si se afectaron filas.
-getAlumno(String control)
-
-Descripción: Obtiene los datos de un alumno específico por su Id.
-Parámetros: Un String que representa el Id del alumno.
-Retorno: Un objeto Alumno si se encuentra, null en caso contrario.
-Lógica:
-Conecta con la base de datos.
-Prepara una declaración SQL para seleccionar un alumno por su Id.
-Ejecuta la consulta y asigna los valores del ResultSet a un objeto Alumno.
-eliminarAlumno(String control)
-
-Descripción: Elimina un alumno de la base de datos por su Id.
-Parámetros: Un String que representa el Id del alumno.
-Retorno: true si la eliminación fue exitosa, false en caso contrario.
-Lógica:
-Conecta con la base de datos.
-Prepara una declaración SQL para eliminar el alumno con el Id proporcionado.
-Ejecuta la eliminación y verifica si se afectaron filas.
+  ++ Descripción: Elimina un alumno de la base de datos por su Id.
+  ++ Parámetros: Un String que representa el Id del alumno.
+  ++ Retorno: true si la eliminación fue exitosa, false en caso contrario.
+  ++ Lógica:
+  Conecta con la base de datos.
+  Prepara una declaración SQL para eliminar el alumno con el Id proporcionado.
+  Ejecuta la eliminación y verifica si se afectaron filas.
   
 
 
