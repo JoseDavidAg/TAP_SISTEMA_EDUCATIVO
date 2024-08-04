@@ -14,10 +14,9 @@ La separación clara entre estos componentes permite una mejor organización del
 
 ### Paquetes
 Cuenta con los siguientes paquetes 
-
-  •	Validaciones: Contiene la clase validacion.java. Para algunas validaciones dentro del sistema, como por ejemplo la contraseña, donde tiene que tener en ella ciertas características 
+• Validaciones: Contiene la clase validacion.java. Para algunas validaciones dentro del sistema, como por ejemplo la contraseña, donde tiene que tener en ella ciertas características 
     para que pueda ser acepta en el sistema, al momento de crear una cuenta (un nuevo usuario). 
-  •	conexion: Contiene la clase Conexion.java; que es la conexión a la base de datos manejada en MySQL Workbench.
+• conexion: Contiene la clase Conexion.java; que es la conexión a la base de datos manejada en MySQL Workbench.
   •	controlador: Contiene controladores específicos para diferentes entidades y funcionalidades del sistema, lo cual facilita el mantenimiento y la escalabilidad del código.
   •	imagenes: Dentro de este paquete se encuentran todas las imágenes que se ocuparon para darle más diseño y estética al sistema. 
   •	modelo: Contiene las clases Alumno.java, Grupo.java, Horario.java, Materia.java, etc. En este paquete se representa cada entidad del sistema educativo
