@@ -8,7 +8,9 @@ Este sistema fue creado con la intención de automatizar el envió de calificaci
 ## Características
 
 ### MVC
-Este sistema está hecho de acuerdo al Modelo Vista Controlador 
+La estructura del proyecto sigue el patrón de diseño Modelo-Vista-Controlador 
+La separación clara entre estos componentes permite una mejor organización del código, facilita el mantenimiento, la escalabilidad del sistema y hace que sea más fácil de probar y modificar de manera independiente cada componente.
+
 
 ### Paquetes
 Cuenta con los siguientes paquetes 
