@@ -302,7 +302,7 @@ public void guardarGrupo() {
     
     // Retrieve selected item and convert to int
     Object selectedItem = comboGrado.getSelectedItem();
-    int idCurso = 0;
+    int idCurso ;
     
     // Validate input
     if (nombre.equals("") || selectedItem == null) {
