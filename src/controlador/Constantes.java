@@ -9,8 +9,8 @@ package controlador;
 public class Constantes {
 
    
-    public static final String FROM_EMAIL= "ambrosiojosedavid@gmail.com";
-    public static final String PASSWORD= "mwsd bdrt jzpw otpq";
+    public static final String FROM_EMAIL= "";
+    public static final String PASSWORD= "";
 
 
   }   
