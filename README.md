@@ -298,8 +298,8 @@ Esta clase la manejamos para incriptar la contraseña, pues define dos métodos 
 ### VISTA
   
 #### Vista Login 
+![image](https://github.com/user-attachments/assets/32454b58-34d5-4095-982c-9b1d7f98771b)
 
-En esta vista 
 
 ##### Componentes y Diseño de la Interfaz
 
@@ -358,6 +358,18 @@ Esta vista es perecida a la de modificar usuario, pues también se muestra el CR
 ![image](https://github.com/user-attachments/assets/5fb9ed19-c858-4210-8eb1-5b047f482226)
 
 
+
+#### ScheduleFrame
+
+La clase ScheduleFrame configura una GUI para asignar horarios a profesores.
+
+Obtiene datos de profesores de una base de datos, inicializa componentes de la GUI y configura el manejo de eventos.
+
+El horario puede ser editado a través de una tabla con combo boxes para materias y grupos.
+
+El botón de guardar actualmente imprime el horario en la consola, pero esto puede ser extendido para guardar los datos en una base de datos.
+
+
 #### VistaPrincipalA
 
 Como tenemos dos nieveles de usuario, lo que es el Administrador y el profesor; desde la vista del administrador se puede agregar nuevos alumnos, profesores, materias, grupos, usuarios y cerrar sesión.
@@ -374,16 +386,6 @@ Y que al momento de dar clic en este alumno, podemos tambien dar clic en el bot�
 
 Así como un botón de cerrar sesión. 
 
-
-#### ScheduleFrame
-
-La clase ScheduleFrame configura una GUI para asignar horarios a profesores.
-
-Obtiene datos de profesores de una base de datos, inicializa componentes de la GUI y configura el manejo de eventos.
-
-El horario puede ser editado a través de una tabla con combo boxes para materias y grupos.
-
-El botón de guardar actualmente imprime el horario en la consola, pero esto puede ser extendido para guardar los datos en una base de datos.
 
 
 ##### Colaboradores: 
